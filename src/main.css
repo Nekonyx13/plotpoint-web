@@ -1,0 +1,34 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --text: 11 4 7;
+    --background: 244 244 251;
+    --primary: 217 102 77;
+    --secondary: 223 139 139;
+    --accent: 115 33 86;
+  }
+  .dark {
+    --text: 251 244 247;
+    --background: 4 4 11;
+    --primary: 177 63 37;
+    --secondary: 116 32 32;
+    --accent: 222 140 193;
+  }
+
+  body {
+    @apply font-body text-text bg-background text-base;
+    scrollbar-gutter: stable both-edges;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-heading font-bold;
+  }
+}
