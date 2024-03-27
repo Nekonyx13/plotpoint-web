@@ -7,7 +7,7 @@ import NavBar from './components/NavBar.vue'
     <header>
       <NavBar class="h-full" />
     </header>
-    <main class="flex-1 bg-primary overflow-auto">
+    <main class="flex-1 overflow-auto">
       <router-view />
     </main>
   </div>

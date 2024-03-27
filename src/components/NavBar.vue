@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import ChracterIcon from './icons/CharacterIcon.vue'
 
 const sidebarItems = ref([
   { title: 'Characters', name: 'characters' },
@@ -9,15 +10,27 @@ const sidebarItems = ref([
 </script>
 
 <template>
-  <nav class="bg-secondary font-heading flex flex-col gap-4">
+  <nav class="font-heading flex flex-col gap-4 border-r-2 border-text/10">
     <div class="bg-background">
+      <router-link class="p-2 flex gap-2 hover:bg-accent/10" :to="{ name: 'home' }">
+        <div
+          class="w-10 h-10 bg-background border-text/10 border-2 rounded flex items-center justify-center"
+        >
+          Home
+        </div>
+      </router-link>
+
       <router-link
         v-for="item in sidebarItems"
         :key="item.title"
-        class="p-2 flex gap-2 hover:bg-accent/10"
+        class="px-2 py-1 flex gap-2 hover:bg-accent/10"
         :to="item.name"
       >
-        <div class="w-8 h-8 bg-accent/20 rounded"></div>
+        <div
+          class="w-10 h-10 bg-background border-text/10 border-2 rounded flex items-center justify-center"
+        >
+          <ChracterIcon class="w-6 h-6 text-primary" />
+        </div>
         <span class="inline-flex items-center">{{ item.title }}</span>
       </router-link>
     </div>
