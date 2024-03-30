@@ -5,6 +5,8 @@ export const usePreferenceStore = defineStore('preferences', () => {
   const THEMES = ref(['light', 'dark'])
   const theme = ref<string>(localStorage.getItem('theme') || 'light')
 
+  document.body.className = theme.value
+
   watch(theme, (newTheme) => {
     localStorage.setItem('theme', newTheme)
     // add a class to the body to change the theme

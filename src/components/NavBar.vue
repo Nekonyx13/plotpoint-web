@@ -42,7 +42,7 @@ const sidebarItems = ref([
       </div>
     </nav>
 
-    <select v-model="theme" class="w-1/3">
+    <select v-model="theme">
       <option v-for="t in preferenceStore.THEMES" :value="t" :key="t">
         {{ t.charAt(0).toUpperCase() + t.slice(1) }}
       </option>
