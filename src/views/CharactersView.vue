@@ -25,7 +25,11 @@ function handleZoom(e: WheelEvent) {
 <template>
   <div
     ref="content-window"
-    class="w-full h-full bg-gray-400 overflow-auto relative"
+    class="w-full h-full bg-white overflow-auto relative"
+    :style="{
+      backgroundSize: `${zoomValue * 64}px ${zoomValue * 64}px`
+    }"
+    id="content-window"
     @wheel="handleZoom"
   >
     <!-- Toolbar -->
@@ -58,5 +62,10 @@ function handleZoom(e: WheelEvent) {
 <style scoped>
 .toolbar button {
   @apply w-8 h-8 flex items-center justify-center rounded bg-accent text-white;
+}
+
+#content-window {
+  background: white;
+  background-image: radial-gradient(theme('colors.text'), theme('colors.background') 2px);
 }
 </style>

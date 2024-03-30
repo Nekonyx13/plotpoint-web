@@ -18,6 +18,14 @@
     --accent: 222 140 193;
   }
 
+  .light {
+    --text: 11 4 7;
+    --background: 244 244 251;
+    --primary: 217 102 77;
+    --secondary: 223 139 139;
+    --accent: 115 33 86;
+  }
+
   body {
     @apply font-body text-text bg-background text-base;
     scrollbar-gutter: stable both-edges;
