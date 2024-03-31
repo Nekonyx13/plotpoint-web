@@ -15,12 +15,12 @@ const sidebarItems = ref([
 </script>
 
 <template>
-  <div class="font-heading flex flex-col gap-4 border-r-2 border-text/10">
+  <div class="font-heading flex flex-col gap-4 border-r border-text/25">
     <nav>
       <div class="bg-background">
         <router-link class="p-2 flex gap-2 hover:bg-accent/10" :to="{ name: 'home' }">
           <div
-            class="w-10 h-10 bg-background border-text/10 border-2 rounded flex items-center justify-center"
+            class="w-8 h-8 bg-background border-text/25 border rounded flex items-center justify-center"
           >
             Home
           </div>
@@ -33,7 +33,7 @@ const sidebarItems = ref([
           :to="item.name"
         >
           <div
-            class="w-10 h-10 bg-background border-text/10 border-2 rounded flex items-center justify-center"
+            class="w-8 h-8 bg-background border-text/25 border rounded flex items-center justify-center"
           >
             <ChracterIcon class="w-6 h-6 text-primary" />
           </div>
