@@ -15,31 +15,21 @@ const sidebarItems = ref([
 </script>
 
 <template>
-  <div class="font-heading flex flex-col gap-4 border-r border-text/25">
-    <nav>
-      <div class="bg-background">
-        <router-link class="p-2 flex gap-2 hover:bg-accent/10" :to="{ name: 'home' }">
-          <div
-            class="w-8 h-8 bg-background border-text/25 border rounded flex items-center justify-center"
-          >
-            Home
-          </div>
-        </router-link>
+  <div class="font-heading flex flex-col gap-4 border-r border-text/25 p-2">
+    <nav class="flex flex-col">
+      <router-link class="nav-link" :to="{ name: 'home' }">
+        <div class="nav-icon">
+          <ChracterIcon class="w-full h-full text-primary" />
+        </div>
+        <span class="inline-flex items-center">Home</span>
+      </router-link>
 
-        <router-link
-          v-for="item in sidebarItems"
-          :key="item.title"
-          class="px-2 py-1 flex gap-2 hover:bg-accent/10"
-          :to="item.name"
-        >
-          <div
-            class="w-8 h-8 bg-background border-text/25 border rounded flex items-center justify-center"
-          >
-            <ChracterIcon class="w-6 h-6 text-primary" />
-          </div>
-          <span class="inline-flex items-center">{{ item.title }}</span>
-        </router-link>
-      </div>
+      <router-link v-for="item in sidebarItems" :key="item.title" class="nav-link" :to="item.name">
+        <div class="nav-icon">
+          <ChracterIcon class="w-full h-full text-primary" />
+        </div>
+        <span class="inline-flex items-center">{{ item.title }}</span>
+      </router-link>
     </nav>
 
     <select v-model="theme">
@@ -50,4 +40,12 @@ const sidebarItems = ref([
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.nav-link {
+  @apply flex gap-2 py-2 pr-4 hover:bg-primary/20 rounded transition-colors;
+}
+
+.nav-icon {
+  @apply w-8 h-8 p-1;
+}
+</style>
