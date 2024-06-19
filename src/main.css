@@ -41,4 +41,9 @@
     @apply bg-background text-text font-body;
     font-family: 'Roboto Slab', sans-serif;
   }
+
+  input,
+  textarea {
+    @apply bg-background text-text border border-text/25 rounded-md py-1 px-2 block focus:border-accent focus:outline-none;
+  }
 }

@@ -15,18 +15,18 @@ const sidebarItems = ref([
 </script>
 
 <template>
-  <div class="font-heading flex flex-col gap-4 border-r border-text/25 p-2">
+  <div class="font-heading flex flex-col gap-4 border-r border-text/25 p-2 text-text/75">
     <nav class="flex flex-col">
       <router-link class="nav-link" :to="{ name: 'home' }">
         <div class="nav-icon">
-          <ChracterIcon class="w-full h-full text-primary" />
+          <ChracterIcon class="w-full h-full" />
         </div>
         <span class="inline-flex items-center">Home</span>
       </router-link>
 
       <router-link v-for="item in sidebarItems" :key="item.title" class="nav-link" :to="item.name">
         <div class="nav-icon">
-          <ChracterIcon class="w-full h-full text-primary" />
+          <ChracterIcon class="w-full h-full" />
         </div>
         <span class="inline-flex items-center">{{ item.title }}</span>
       </router-link>
@@ -42,7 +42,15 @@ const sidebarItems = ref([
 
 <style scoped>
 .nav-link {
-  @apply flex gap-2 py-2 pr-4 hover:bg-primary/20 rounded transition-colors;
+  @apply flex gap-2 py-2 pr-4 hover:bg-text/10 rounded transition-colors;
+}
+
+.router-link-active {
+  @apply bg-primary/20 text-text hover:bg-primary/20;
+}
+
+.router-link-active .nav-icon {
+  @apply text-primary;
 }
 
 .nav-icon {

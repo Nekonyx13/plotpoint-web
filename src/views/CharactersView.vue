@@ -3,6 +3,7 @@ import { ref } from 'vue'
 import { useMagicKeys, useMouseInElement } from '@vueuse/core'
 import CharacterIcon from '@/components/icons/CharacterIcon.vue'
 import CursorIcon from '@/components/icons/CursorIcon.vue'
+import ToolBar from '@/components/ToolBar.vue'
 import type ToolbarData from '@/types/ToolbarData'
 
 const contentWindow = ref<HTMLElement | null>(null)
@@ -42,7 +43,9 @@ function handleMouseDown() {
   if (space.value) {
     dragStartContentPosition.value = { x: contentPosition.value.x, y: contentPosition.value.y }
   } else {
+    // reset marquee
     marqueePosition.value.start = { x: x.value, y: y.value }
+    marqueePosition.value.end = { x: x.value, y: y.value }
   }
 }
 
@@ -64,25 +67,30 @@ function handleMouseMove() {
     marqueePosition.value.end = { x: x.value, y: y.value }
   }
 }
+
+const toolbarItems = [
+  { name: 'select', icon: CursorIcon, tooltip: 'Select' },
+  { name: 'move', icon: CursorIcon, tooltip: 'Move' },
+  { name: 'zoom', icon: CursorIcon, tooltip: 'Zoom' },
+  { name: 'rotate', icon: CursorIcon, tooltip: 'Rotate' },
+  { name: 'flip', icon: CursorIcon, tooltip: 'Flip' }
+]
+
+const characterData = ref({
+  title: '',
+  name: 'Lydia Rudwell',
+  age: 17,
+  occupation: 'Student'
+})
 </script>
 
 <template>
   <div class="w-full h-full flex">
-    <!-- Sidebar -->
-    <div class="sidebar p-2 h-full bg-accent/20 flex flex-col gap-2">
-      +
-      <div
-        v-for="i in 10"
-        :key="i"
-        class="w-8 h-8 p-[0.4rem] bg-accent/30 rounded flex items-center justify-center"
-      >
-        <CursorIcon class="w-full h-full text-text" />
-      </div>
-    </div>
+    <ToolBar :items="toolbarItems" v-model="toolbarData.mode" />
 
-    <!-- Zoombar on the right side-->
+    <!-- Zoombar -->
     <div
-      class="toolbar flex flex-col gap-2 bg-accent/20 rounded p-2 absolute z-10 top-1/2 transform -translate-y-1/2 right-2"
+      class="zoombar border border-text/25 flex flex-col gap-2 bg-background items-center rounded-md absolute z-10 top-1/2 transform -translate-y-1/2 right-2"
     >
       <button @click="zoomValue = 1">R</button>
       <button @click="zoomValue += 0.4">+</button>
@@ -90,6 +98,7 @@ function handleMouseMove() {
       <span> {{ Math.round(zoomValue * 100) }}% </span>
       <span> {{ Math.round(x) }}</span>
       <span> {{ Math.round(y) }}</span>
+      <span> {{ toolbarData.mode }}</span>
     </div>
 
     <div
@@ -106,17 +115,6 @@ function handleMouseMove() {
       @mouseup="handleMouseUp"
       @mousemove="handleMouseMove"
     >
-      <!-- Marquee -->
-      <div
-        class="absolute border-dashed border-2 border-text bg-text bg-opacity-10 z-10 text-xl"
-        :style="{
-          top: `${Math.min(marqueePosition.start.y, marqueePosition.end.y)}px`,
-          left: `${Math.min(marqueePosition.start.x, marqueePosition.end.x)}px`,
-          width: `${Math.abs(marqueePosition.start.x - marqueePosition.end.x)}px`,
-          height: `${Math.abs(marqueePosition.start.y - marqueePosition.end.y)}px`
-        }"
-      ></div>
-
       <div
         ref="content"
         :style="{
@@ -126,17 +124,34 @@ function handleMouseMove() {
           transformOrigin: 'top left',
           transition: 'transform 0.1s ease-out'
         }"
-        class="absolute bg-gray-300"
+        class="absolute"
       >
-        <CharacterIcon class="w-32 h-32 text-primary" />
+        <input
+          type="text"
+          class="border-none bg-transparent font-heading text-5xl"
+          v-model="characterData.title"
+          placeholder="Enter a title..."
+        />
       </div>
+
+      <!-- Marquee -->
+      <div
+        v-if="marqueePosition.start.x !== marqueePosition.end.x"
+        class="absolute border-dashed border-2 border-text bg-text bg-opacity-10 z-10 text-xl"
+        :style="{
+          top: `${Math.min(marqueePosition.start.y, marqueePosition.end.y)}px`,
+          left: `${Math.min(marqueePosition.start.x, marqueePosition.end.x)}px`,
+          width: `${Math.abs(marqueePosition.start.x - marqueePosition.end.x)}px`,
+          height: `${Math.abs(marqueePosition.start.y - marqueePosition.end.y)}px`
+        }"
+      ></div>
     </div>
   </div>
 </template>
 
 <style scoped>
-.toolbar button {
-  @apply w-8 h-8 flex items-center justify-center rounded bg-accent text-white;
+.zoombar button {
+  @apply w-8 h-8 p-2 flex items-center justify-center rounded-md hover:bg-accent/20 active:text-accent;
 }
 
 #content-window {
