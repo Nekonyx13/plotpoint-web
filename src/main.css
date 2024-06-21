@@ -5,18 +5,18 @@
 @layer base {
   :root,
   .light {
-    --text: 11 4 7;
-    --background: 244 244 251;
-    --primary: 217 102 77;
-    --secondary: 223 139 139;
-    --accent: 115 33 86;
+    --text: 13 11 15;
+    --background: 232 228 236;
+    --primary: 238 115 63;
+    --secondary: 149 55 104;
+    --accent: 153 81 225;
   }
   .dark {
-    --text: 251 244 247;
-    --background: 4 4 11;
-    --primary: 232 105 77;
-    --secondary: 116 32 32;
-    --accent: 222 140 193;
+    --text: 242 240 244;
+    --background: 23 19 27;
+    --primary: 192 69 17;
+    --secondary: 200 106 155;
+    --accent: 102 30 174;
   }
 
   body {

@@ -15,7 +15,7 @@ const sidebarItems = ref([
 </script>
 
 <template>
-  <div class="font-heading flex flex-col gap-4 border-r border-text/25 p-2 text-text/75">
+  <div class="font-heading flex flex-col gap-4 border-r border-text/25 p-2">
     <nav class="flex flex-col">
       <router-link class="nav-link" :to="{ name: 'home' }">
         <div class="nav-icon">
@@ -46,7 +46,7 @@ const sidebarItems = ref([
 }
 
 .router-link-active {
-  @apply bg-primary/20 text-text hover:bg-primary/20;
+  @apply text-text border-l-4 border-primary;
 }
 
 .router-link-active .nav-icon {

@@ -19,7 +19,7 @@ function handleClick(item: { action?: () => void; name: string }) {
       v-for="item in props.items"
       :key="item.name"
       class="w-8 h-8 p-2 rounded hover:bg-text/10 cursor-pointer"
-      :class="{ 'bg-accent/20 text-accent': item.name === mode }"
+      :class="{ 'bg-secondary/20 text-secondary': item.name === mode }"
       @click="handleClick(item)"
       :title="item.tooltip"
     >
